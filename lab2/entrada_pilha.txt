@@ -1,0 +1,10 @@
+e2 e8 e5 r r e9
+e1 e4 e7 r e9 r e3
+e10 e11 r e12 r r e13 e14 e15 r
+e20 e21 e22 r r r e23 e24 r e25
+e3 e6 e9 e12 r r e15 r e18
+e5 e7 r e8 e10 r r e11 e13
+e30 e31 r e32 e33 r e34 r e35 e36
+e40 e41 e42 r e43 r r e44 e45
+e50 r e51 e52 r e53 e54 r r e55
+e60 e61 e62 e63 r r r e64 e65

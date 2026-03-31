@@ -1,0 +1,10 @@
+a2 a8 a5 r r a9
+a1 a4 a7 r a9 r a3
+a10 a11 r a12 r r a13 a14 a15 r
+a20 a21 a22 r r r a23 a24 r a25
+a3 a6 a9 a12 r r a15 r a18
+a5 a7 r a8 a10 r r a11 a13
+a30 a31 r a32 a33 r a34 r a35 a36
+a40 a41 a42 r a43 r r a44 a45
+a50 r a51 a52 r a53 a54 r r a55
+a60 a61 a62 a63 r r r a64 a65
