@@ -34,18 +34,19 @@ int calcula_altura(Nodo* no) {
     int alt_esq = calcula_altura(no->esq);
     int alt_dir = calcula_altura(no->dir);
 
-     if (alt_esq > alt_dir) {
-        no->altura = 1 + alt_esq;
+    if (alt_esq > alt_dir) {
+        alt_esq++;
+        return alt_esq;
     } else {
-        no->altura = 1 + alt_dir;
+        alt_dir++;
+        return alt_dir;
     }   
-    return no->altura;
 }
 
 
 void atualiza_fator(Nodo* no) {
     if (no != NULL) {
-        no->fb = altura(no->dir) - altura(no->esq);
+        no->fb = calcula_altura(no->dir) - calcula_altura(no->esq);
     }
 }
 
@@ -73,7 +74,7 @@ Nodo* rotacao_esquerda(Nodo* raiz) {
     raiz->dir = t->esq;
     t->esq = raiz;
     
-    atualiza_fator(r);
+    atualiza_fator(raiz);
     atualiza_fator(t);
     return t;
 }
@@ -132,10 +133,10 @@ Nodo* insere(Nodo* raiz, int chave) {
     atualiza_fator(raiz);
 
     if (raiz->fb == -2) { //pra esquerda
-        if (r->esq != NULL && r->esq->fb <= 0) {
-            return rotacao_direita(r);
+        if (raiz->esq != NULL && raiz->esq->fb <= 0) {
+            return rotacao_direita(raiz);
         } else {
-            return rotacao_dupla_direita(r);
+            return rotacao_dupla_direita(raiz);
         }
     }
     if (raiz->fb == 2) { //pra direita
@@ -149,53 +150,63 @@ Nodo* insere(Nodo* raiz, int chave) {
     return raiz;
 }
 
-Nodo* remove_no(Nodo* r, int chave) {
-    if (r == NULL) return NULL;
+Nodo* remove_n(Nodo* raiz, int chave) {
+    if (raiz == NULL) {
+        return NULL;
+    } 
 
-    if (chave < r->chave) {
-        r->esq = remove_no(r->esq, chave);
-    } else if (chave > r->chave) {
-        r->dir = remove_no(r->dir, chave);
+    Nodo* temp = (Nodo*)malloc(sizeof(Nodo));
+
+    if (chave < raiz->chave) {
+        raiz->esq = remove_n(raiz->esq, chave);
+    } else if (chave > raiz->chave) {
+        raiz->dir = remove_n(raiz->dir, chave);
     } else {
-        if (r->esq == NULL || r->dir == NULL) {
-            Nodo* temp = r->esq ? r->esq : r->dir;
-            if (temp == NULL) {
-                temp = r;
-                r = NULL;
+        if (raiz->esq == NULL || raiz->dir == NULL) { 
+            if (raiz->esq) {
+               Nodo* temp = raiz->esq;  
             } else {
-                *r = *temp; 
+                Nodo* temp = raiz->dir;
+            }
+            if (temp == NULL) {
+                temp = raiz;
+                raiz = NULL;
+            } else {
+                *raiz = *temp; 
             }
             free(temp);
         } else {
             //2 filhos: pega o sucessor (menor da direita)
-            Nodo* temp = r->dir;
+            Nodo* temp = raiz->dir;
             while (temp->esq != NULL) temp = temp->esq;
-            r->chave = temp->chave;
-            r->dir = remove_no(r->dir, temp->chave);
+            raiz->chave = temp->chave;
+            raiz->dir = remove_n(raiz->dir, temp->chave);
         }
     }
 
-    if (r == NULL) return r; //vazia
+    if (raiz == NULL) {
+        return NULL;
+    }  //vazia
 
-    atualiza_fb(r);
+    atualiza_fator(raiz);
 
     //balanceamento dps da remoção
-    if (r->fb == -2) {
-        if (r->esq != NULL && r->esq->fb <= 0) {
-            return rotacao_direita(r);
+    if (raiz->fb == -2) {
+        if (raiz->esq != NULL && raiz->esq->fb <= 0) {
+            return rotacao_direita(raiz);
         } else {
-            return rotacao_dupla_direita(r);
+            return rotacao_dupla_direita(raiz);
         }
     }
-    if (r->fb == 2) {
-        if (r->dir != NULL && r->dir->fb >= 0) {
-            return rotacao_esquerda(r);
+    if (raiz->fb == 2) {
+        if (raiz->dir != NULL && raiz->dir->fb >= 0) {
+            return rotacao_esquerda(raiz);
         } else {
-            return rotacao_dupla_esquerda(r);
+            return rotacao_dupla_esquerda(raiz);
         }
     }
 
-    return r;
+    return raiz;
 }
 
 void pre_ordem(Nodo* r) {
@@ -238,7 +249,7 @@ int main() {
     for (int i = 0; i < num_remover; i++) {
         operacao_rotacao[0] = '\0'; //limpa global
         
-        arvore.raiz = remove_no(arvore.raiz, chaves_remover[i]);
+        arvore.raiz = remove_n(arvore.raiz, chaves_remover[i]);
         
         if (strlen(operacao_rotacao) == 0) {
             printf("Remoção %d -> sem rotação.\n", chaves_remover[i]);
