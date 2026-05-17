@@ -1,16 +1,11 @@
 # Daniel Santana Souza - 2310995
-#
-# Plota o grafico "numero de chaves inseridas X numero de colisoes geradas"
-# a partir do CSV produzido por hash.c. Gera dois arquivos PNG:
-#   - colisoes.png            : as 3 estrategias sobrepostas
-#   - colisoes_duplo_hash.png : apenas a estrategia escolhida (duplo hash)
 
 import csv
 import os
 import sys
 
 import matplotlib
-matplotlib.use("Agg")            # backend sem display
+matplotlib.use("Agg")          
 import matplotlib.pyplot as plt
 
 

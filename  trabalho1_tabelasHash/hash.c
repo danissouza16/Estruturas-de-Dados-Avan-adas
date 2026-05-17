@@ -1,32 +1,7 @@
 // Daniel Santana Souza - 2310995
 //
-// Lab 4 - Tabelas de dispersão (hash) com endereçamento aberto.
+// Trabalho 1 - Tabelas de dispersão (hash) com endereçamento aberto.
 //
-// O arquivo "CPFsValidos.txt" contém 4096 CPFs (números de 11 dígitos,
-// possivelmente com zeros à esquerda). O programa carrega esses CPFs,
-// converte cada um em um unsigned long long e os insere, um a um, em
-// uma tabela hash de tamanho M = 4919 (primo, com ~20% de folga sobre
-// 4096, não próximo a uma potência de 2 e congruente a 3 módulo 4).
-//
-// Três estratégias de tratamento de colisões via endereçamento aberto
-// são executadas e comparadas:
-//   1) Sondagem linear     : h(x,k) = (h1(x) + k) mod M
-//   2) Sondagem quadrática : h(x,k) = (h1(x) + k + k*k) mod M
-//   3) Duplo hash          : h(x,k) = (h1(x) + k * h2(x)) mod M
-//      com h2(x) = 1 + (x mod (M-1))
-//
-// A função hash primária é a clássica do "método da divisão" recomendada
-// nos slides da disciplina:
-//      h1(x) = x mod M
-//
-// Para cada estratégia o programa registra, em pontos de checkpoint
-// (100, 200, 300, ..., 4000, 4096 chaves inseridas), o número total
-// (acumulado) de colisões geradas até o momento. Aqui contamos como
-// "colisão" cada tentativa de sondagem que encontrou a posição já
-// ocupada (ou seja: número de comparações além da primeira para cada
-// inserção). Os resultados são escritos em "colisoes.csv" para serem
-// plotados em um gráfico.
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,8 +27,6 @@ static unsigned int h1(u64 x) {
 }
 
 static unsigned int h2(u64 x) {
-    /* h2 retorna valor em [1, M-1]. Como M é primo, gcd(h2, M) = 1,
-       garantindo que o duplo hash visita as M posições da tabela. */
     return 1u + (unsigned int)(x % (u64)(M - 1));
 }
 
@@ -69,14 +42,6 @@ static void inicializa(Tabela *t) {
 
 /* ------------------------------------------------------------------ */
 /* Inserção                                                            */
-/*                                                                     */
-/* Cada função abaixo devolve, em *colisoes, o número de posições      */
-/* ocupadas visitadas até a inserção bem-sucedida (k tentativas que    */
-/* falharam antes de achar slot vazio). Retorna:                       */
-/*    1  -> chave inserida                                             */
-/*    0  -> chave já presente (não conta como inserção)                */
-/*   -1  -> falhou em achar slot (apenas teoricamente possível na      */
-/*          sondagem quadrática)                                       */
 /* ------------------------------------------------------------------ */
 
 static int insere_linear(Tabela *t, u64 chave, int *colisoes) {
@@ -241,7 +206,7 @@ int main(void) {
            100.0 * ((double)M / (double)n - 1.0));
     printf("\n");
 
-    /* monta lista de checkpoints: 100, 200, ..., 4000, n */
+    /* monta lista de checkpoints */
     int checkpoints[MAX_CPFS / PASSO + 2];
     int n_checkpoints = 0;
     for (int v = PASSO; v <= n; v += PASSO) {
