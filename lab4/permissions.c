@@ -1,5 +1,5 @@
 // Daniel Santana Souza - 2310995
-// Laboratório 4 - Mapas de bits (Sistema de permissões de usuários)
+// Laboratório 4
 
 #include <stdio.h>
 
