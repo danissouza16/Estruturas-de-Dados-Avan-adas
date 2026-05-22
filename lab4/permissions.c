@@ -45,12 +45,14 @@ int main(void) {
     Permissions user1 = 0;
     Permissions user2 = 0;
 
-    grantPermission(&user1, 0); // leitura
     grantPermission(&user1, 1); // escrita
-    grantPermission(&user1, 2); // execução
+    grantPermission(&user1, 4); // criar pastas
+    grantPermission(&user1, 5); // compartilhar arquivos
+    grantPermission(&user1, 7); // alterar configurações
 
-    grantPermission(&user2, 0); // leitura
-    grantPermission(&user2, 3); // apagar arquivos
+    grantPermission(&user2, 2); // execução
+    grantPermission(&user2, 4); // criar pastas
+    grantPermission(&user2, 5); // compartilhar arquivos
     grantPermission(&user2, 6); // administrar usuários
 
     printf("Permissões do Usuário 1:\n");
@@ -71,11 +73,11 @@ int main(void) {
            hasPermission(user1, 3) ? "Sim" : "Não");
     printf("Usuário 2 pode administrar usuários? %s\n",
            hasPermission(user2, 6) ? "Sim" : "Não");
-    printf("Usuário 1 pode escrever? %s\n",
-           hasPermission(user1, 1) ? "Sim" : "Não");
+    printf("Usuário 1 pode criar pastas? %s\n",
+           hasPermission(user1, 4) ? "Sim" : "Não");
 
-    printf("\nRevogando permissão de escrita do Usuário 1...\n");
-    revokePermission(&user1, 1);
+    printf("\nRevogando permissão de compartilhar do Usuário 1...\n");
+    revokePermission(&user1, 5);
     printf("Permissões do Usuário 1 após revogação:\n");
     showPermissions(user1);
 
