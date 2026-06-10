@@ -1,8 +1,5 @@
 // Daniel Santana Souza - 2310995
-// Laboratório 5 - Árvore B (ordem 2)
-//
-// Módulo: definição do tipo de nó da árvore B de ordem 2 e dos protótipos
-// das funções utilizadas pelo programa principal.
+// Laboratório 4 - Árvore B (ordem 2)
 
 #ifndef ARVOREB_H
 #define ARVOREB_H

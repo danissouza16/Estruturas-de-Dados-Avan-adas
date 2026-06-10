@@ -1,9 +1,6 @@
 // Daniel Santana Souza - 2310995
 // Laboratório 5 - Árvore B (ordem 2)
 //
-// Módulo principal: constrói "à mão" uma árvore B de ordem 2 (cada nó com
-// até 4 chaves e 5 ponteiros) e testa a função intervalo() com os limites
-// pedidos no enunciado: [5, 300], [50, 100] e [70, 135].
 //
 // Árvore construída (3 níveis, balanceada):
 //

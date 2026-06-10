@@ -1,8 +1,5 @@
 // Daniel Santana Souza - 2310995
-// Laboratório 5 - Árvore B (ordem 2)
-//
-// Módulo: implementação das funções de construção, travessia e liberação
-// da árvore B, incluindo a função intervalo() pedida no enunciado.
+// Laboratório 4 - Árvore B (ordem 2)
 
 #include <stdio.h>
 #include <stdlib.h>
