@@ -1,38 +1,11 @@
 // Daniel Santana Souza - 2310995
 // Laboratório 7 - Grafos: Sistema de Evacuação Inteligente
-//
-// Programa principal. Monta o mapa do edifício como um grafo não dirigido
-// em listas de adjacência e executa os experimentos pedidos no enunciado:
-//   1) representação do grafo;
-//   2) DFS a partir da Recepção;
-//   3) BFS para os caminhos mínimos até a Saída de Emergência;
-//   4) remoção da conexão Auditorio--CorredorB e análise das componentes
-//      conexas resultantes.
-//
-// Mapa do edifício:
-//
-//        +---------------+
-//        | Laboratorio 1 |
-//        +---------------+
-//                |
-//   +-----------+   +------------+   +---------------+
-//   | Recepcao  |---| Corredor A |---| Laboratorio 2 |
-//   +-----------+   +------------+   +---------------+
-//         |
-//   +-----------+   +------------+   +----------+
-//   | Auditorio |---| Corredor B |---|  Escada  |
-//   +-----------+   +------------+   +----------+
-//                         |
-//                 +---------------------+
-//                 | Saida de Emergencia |
-//                 +---------------------+
 
 #include <stdio.h>
 
 #include "grafo.h"
 
-/* Nomes dos ambientes (sem acentos para manter a saída portável no
- * terminal). São usados de forma consistente em todo o programa. */
+/* Nomes dos ambientes. */
 #define LAB1   "Laboratorio1"
 #define LAB2   "Laboratorio2"
 #define RECEP  "Recepcao"

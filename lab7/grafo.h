@@ -1,10 +1,5 @@
 // Daniel Santana Souza - 2310995
 // Laboratório 7 - Grafos: Sistema de Evacuação Inteligente
-//
-// Módulo de grafo não dirigido representado por LISTAS DE ADJACÊNCIA.
-// Cada ambiente do prédio é um vértice; cada conexão (porta, corredor ou
-// escada) é uma aresta. Os vértices são identificados por um nome (string),
-// o que torna a saída do programa legível para a equipe de evacuação.
 
 #ifndef GRAFO_H
 #define GRAFO_H

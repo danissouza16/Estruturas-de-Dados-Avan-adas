@@ -1,9 +1,5 @@
 // Daniel Santana Souza - 2310995
 // Laboratório 7 - Grafos: Sistema de Evacuação Inteligente
-//
-// Implementação do módulo de grafo não dirigido em listas de adjacência,
-// junto com os algoritmos de percurso DFS e BFS e a contagem de componentes
-// conexas usados pelo sistema de evacuação.
 
 #include <stdio.h>
 #include <stdlib.h>
